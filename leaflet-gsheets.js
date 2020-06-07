@@ -23,6 +23,18 @@ window.addEventListener("DOMContentLoaded", init);
 // Create a new Leaflet map centered on the continental US
 var map = L.map("map").setView([40, -100], 4);
 
+
+var greenIcon = L.icon({
+    iconUrl: 'leaf-green.png',
+    shadowUrl: 'leaf-shadow.png',
+
+    iconSize:     [38, 95], // size of the icon
+    shadowSize:   [50, 64], // size of the shadow
+    iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+    shadowAnchor: [4, 62],  // the same for the shadow
+    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+});
+
 // This is the Carto Positron basemap
 var basemap = L.tileLayer(
   "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}{r}.png",
@@ -185,7 +197,7 @@ function addPoints(data) {
     // AwesomeMarkers is used to create fancier icons
     var icon = L.AwesomeMarkers.icon({
       icon: "info-sign",
-      iconColor: "white",
+      iconColor: "red",
       markerColor: getColor(data[row].category),
       prefix: "glyphicon",
       extraClasses: "fa-rotate-0"
