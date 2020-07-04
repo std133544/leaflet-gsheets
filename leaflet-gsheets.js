@@ -90,10 +90,12 @@ function addPolygons(data) {
     features: []
   };
 
+var name;
   for (var row in data) {
     // The Sheets data has a column 'include' that specifies if that row should be mapped
     if (data[row].include == "y") {
       var coords = JSON.parse(data[row].geometry);
+      name = data[row].name;
 
       geojsonStates.features.push({
         type: "Feature",
@@ -111,9 +113,19 @@ function addPolygons(data) {
     }
   }
 
-  // The polygons are styled slightly differently on mouse hovers
-  var polygonStyle = { color: "#2ca25f", fillColor: "#99d8c9", weight: 1.5 };
-  var polygonHoverStyle = { color: "green", fillColor: "#2ca25f", weight: 3 };
+    var polygonStyle;
+    var polygonHoverStyle;
+
+  if (name =='District of Columbia'){
+       polygonStyle = { color: "#ccceee", fillColor: "#99d8c9", weight: 1.5 };
+       polygonHoverStyle = { color: "red", fillColor: "#2ca25f", weight: 3 };
+  }else{
+
+    // The polygons are styled slightly differently on mouse hovers
+     polygonStyle = { color: "#2ca25f", fillColor: "#99d8c9", weight: 1.5 };
+     polygonHoverStyle = { color: "blue", fillColor: "#2ca25f", weight: 3 };
+}
+
 
   polygonLayer = L.geoJSON(geojsonStates, {
     onEachFeature: function(feature, layer) {
